@@ -62,20 +62,20 @@ void explicit_solver(wave_eq_problem& prob,
     double tau, size_t nt,
     std::ofstream& log_file)
 {
-    // входные параметры:
-    // prob - начальная конфигурация
-    // u_left - левое граничное условие
-    // u_right - правое граничное условие
-    // u_t - начальное условие на производную
-    // tau - шаг по времени
-    // nt - число шагов по времени
-    // log_file - файловый дескриптор для вывода информации
+    // input:
+    // prob - initial configuration
+    // u_left - left boundary condition
+    // u_right - right boundary condition
+    // u_t - initial condition on derivative
+    // tau - time step
+    // nt - number of time steps
+    // log_file - output file descriptor
 
     print_layer(prob.u_prev, log_file);
     apply_initial_conditions(prob, u_t, u_left(1), u_right(1), tau);
     print_layer(prob.u, log_file);
 
-    // эволюция по времени
+    // time evolution
     for (size_t step = 2; step <= nt; ++step)
     {
         explicit_step(prob, u_left(step), u_right(step), tau);
